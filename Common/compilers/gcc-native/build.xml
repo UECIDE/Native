@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<project name="gcc-native" default="build">
+    <property name="version" value="0.1" />
+    <property name="revision" value="2" />
+
+
+    <target name="install" depends="build">
+        <move file="${ant.project.name}.jar" todir="/var/www/uecide/plugins-087/compilers" />
+    </target>
+
+    <target name="build">
+        <mkdir dir="build/${ant.project.name}" />
+        <copy file="files/compiler.txt" todir="build/${ant.project.name}" />
+        <replace file="build/${ant.project.name}/compiler.txt" token="%VERSION%" value="${version}" />
+        <replace file="build/${ant.project.name}/compiler.txt" token="%REVISION%" value="${revision}" />
+        <jar basedir="build" destfile="${ant.project.name}.jar">
+            <manifest>
+                <attribute name="Version" value="${version}-${revision}" />
+                <attribute name="Author" value="Majenko Technologies" />
+                <attribute name="Compiler" value="${ant.project.name}" />
+                <attribute name="Family" value="native" />
+                <attribute name="Platform" value="any" />
+                <attribute name="Arch" value="any" />
+            </manifest>
+        </jar>
+        <delete dir="build" />
+    </target>
+
+    <target name="clean">
+        <delete dir="build" />
+        <delete file="${ant.project.name}.jar" />
+    </target>
+
+</project>

@@ -1,0 +1,35 @@
+name=RaspberryPi
+description=Program the Pi like an Arduino
+compiler=gcc-native
+
+core.flags=-DARDUINO=${core.version}::-D${board}
+
+core.library.api=api
+core.header=Arduino.h
+core.version=%VERSION%
+core.revision=%REVISION%
+version=%VERSION%
+revision=%REVISION%
+
+
+library.path=libraries
+examples.path=examples
+
+ldscript=unknown.ld
+board=_UNKNOWN_BOARD_
+
+upload.xterm.name=Execute in XTerm
+upload.xterm.command=xterm::-title::${filename} - CTRL-C to close::-e::sudo ${build.path}/${filename}
+
+sketch.upload=xterm
+bootloader.upload=
+
+family=native
+build.files=Board_Data.cpp
+
+icon.128=icons/pi128.png
+icon.64=icons/pi64.png
+icon.48=icons/pi48.png
+icon.32=icons/pi32.png
+icon.22=icons/pi22.png
+icon.16=icons/pi16.png
